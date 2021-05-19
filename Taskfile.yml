@@ -1,0 +1,69 @@
+# Copyright (C) 2020 Damien Dart, <damiendart@pobox.com>.
+# This file is distributed under the MIT licence. For more information,
+# please refer to the accompanying "LICENCE" file.
+---
+
+version: '3'
+
+output: 'prefixed'
+
+env:
+  RELEASE_TIMESTAMP:
+    sh: 'date +%Y%m%d%H%M%S'
+
+tasks:
+  default:
+    deps:
+      - task: 'ci'
+
+  ci:
+    cmds:
+      - task: 'clean'
+      - task: 'dependencies'
+      - task: 'lint'
+    desc: 'Run all CI-related tasks'
+
+  clean:
+    cmds:
+      - 'rm -fr node_modules vendor release'
+    desc: 'Delete all buildable files and third-party dependencies'
+
+  dependencies:
+    cmds:
+      - task: 'dependencies:php'
+    desc: 'Run all dependency-installing-related tasks'
+
+  dependencies:php:
+    cmds:
+      - 'composer install --no-ansi --no-interaction --no-progress'
+    desc: 'Install PHP dependencies for building, development, and testing'
+
+  lint:
+    cmds:
+      - task: 'lint:php'
+    desc: 'Run all linting-related tasks'
+
+  lint:php:
+    cmds:
+      - 'vendor/bin/php-cs-fixer fix --allow-risky=yes --dry-run --diff'
+    desc: 'Lint PHP scripts with PHP Coding Standards Fixer'
+
+  release:
+    cmds:
+      - task: 'ci'
+      - 'mkdir -p release'
+      - >-
+        tar -cvf release/release.tgz
+        ./composer.*
+        ./{app,config,database,private,public,routes}/
+        ./bootstrap/app.php
+        ./resources/{lang,views}/
+      - 'envsubst < deployment/variables.yml > release/release.yml'
+      - 'cp deployment/pre-install-tasks.yml release/pre-install-tasks.yml'
+    desc: 'Create release archive and metadata for deployment'
+    env:
+      RELEASE_GIT_SHA:
+        sh: 'git log -n 1 --format=%H'
+    vars:
+      GIT_STATUS:
+        sh: 'git status --porcelain'

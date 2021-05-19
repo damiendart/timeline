@@ -1,7 +1,10 @@
+*.sqlite*
 .env
 .env.backup
 .php-cs-fixer.cache
 .phpunit.result.cache
+bootstrap/cache
 node_modules
-storage/*.key
+release
+storage
 vendor

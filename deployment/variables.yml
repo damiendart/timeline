@@ -1,0 +1,14 @@
+---
+
+github_project: 'damiendart/timeline'
+release_timestamp: '${RELEASE_TIMESTAMP}'
+release_git_sha: '${RELEASE_GIT_SHA}'
+writable_directories_release:
+  - 'bootstrap/cache'
+  - 'storage/framework/cache/data'
+  - 'storage/framework/testing'
+  - 'storage/framework/views'
+writable_directories_shared:
+  - 'app/public'
+  - 'framework/sessions'
+  - 'logs'

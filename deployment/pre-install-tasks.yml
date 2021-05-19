@@ -1,0 +1,32 @@
+---
+
+- name: 'Ensure symbolic links to shared directories exist in release directory'
+  ansible.builtin.file:
+    dest: '{{ __release_base_directory }}/storage/{{ item }}'
+    src: '{{ __vhost_base_directory }}/shared/{{ item }}'
+    state: 'link'
+  loop:
+    - 'app'
+    - 'framework/sessions'
+    - 'logs'
+
+- name: 'Ensure "composer.json" and friends are web-server-readable'
+  ansible.builtin.file:
+    path: '{{ __release_base_directory }}/{{ item }}'
+    group: 'www-data'
+  loop:
+    - 'composer.json'
+    - 'composer.lock'
+
+- name: 'Ensure web-server-writable directories are administrator-accessible'
+  ansible.builtin.command: >-
+    setfacl -Rm
+    default:u:{{ deploy_to_vhost__administrator_username }}:rwx,u:{{ deploy_to_vhost__administrator_username }}:rwx,default:u:www-data:rwx,u:www-data:rwx
+    {{ item }}
+  changed_when: true
+  loop:
+    - '{{ __release_base_directory }}/bootstrap/cache'
+    - '{{ __release_base_directory }}/storage'
+    - '{{ __vhost_base_directory }}/shared/app'
+    - '{{ __vhost_base_directory }}/shared/framework'
+    - '{{ __vhost_base_directory }}/shared/logs'
