@@ -16,22 +16,53 @@ tasks:
     deps:
       - task: 'ci'
 
+  build:
+    cmds:
+      - task: 'build:javascript'
+      - task: 'build:sass'
+    desc: 'Run all building-related tasks'
+
+  build:javascript:
+    cmds:
+      - >-
+        node_modules/.bin/esbuild resources/js/app.js
+        --bundle --log-level=warning --minify
+        --outfile=public/assets/app.js
+    desc: 'Build JavaScript files with esbuild'
+
+  build:sass:
+    cmds:
+      - >-
+        node_modules/.bin/sass --no-source-map -s compressed resources/sass/app.scss
+        | postcss --use autoprefixer --use cssnano --no-map -o public/assets/app.css
+    desc: 'Build CSS files with Sass and friends'
+
   ci:
     cmds:
       - task: 'clean'
       - task: 'dependencies'
+      - task: 'build'
       - task: 'lint'
     desc: 'Run all CI-related tasks'
 
   clean:
     cmds:
-      - 'rm -fr node_modules vendor release'
+      - 'rm -fr node_modules public/assets release vendor'
     desc: 'Delete all buildable files and third-party dependencies'
 
   dependencies:
     cmds:
       - task: 'dependencies:php'
+      - task: 'dependencies:javascript'
     desc: 'Run all dependency-installing-related tasks'
+
+  dependencies:javascript:
+    cmds:
+      # <http://www.tiernok.com/posts/2019/faster-npm-installs-during-ci/>
+      - 'npm ci --prefer-offline --no-audit'
+    env:
+      CI: true
+    desc: 'Install JavaScript dependencies'
 
   dependencies:php:
     cmds:
@@ -40,8 +71,14 @@ tasks:
 
   lint:
     cmds:
+      - task: 'lint:javascript'
       - task: 'lint:php'
     desc: 'Run all linting-related tasks'
+
+  lint:javascript:
+    cmds:
+      - 'node_modules/.bin/eslint resources/js/'
+    desc: 'Lint JavaScript files with ESLint'
 
   lint:php:
     cmds:

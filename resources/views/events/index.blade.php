@@ -2,6 +2,7 @@
 <html lang=en>
 <head>
     <meta charset=utf-8>
+    <link href="/assets/app.css" rel="stylesheet">
     <title>Timeline</title>
 </head>
 <body>
@@ -22,5 +23,6 @@
             @endforeach
         @endforeach
     @endforeach
+    <script async src="/assets/app.js"></script>
 </body>
 </html>

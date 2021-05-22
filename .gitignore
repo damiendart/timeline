@@ -5,6 +5,7 @@
 .phpunit.result.cache
 bootstrap/cache
 node_modules
+public/assets
 release
 storage
 vendor
