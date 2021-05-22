@@ -87,6 +87,12 @@ tasks:
 
   release:
     cmds:
+      - cmd: |
+          {{ if .GIT_STATUS }}
+            echo 'Working directory is dirty! Aborting.'
+            exit 1
+          {{ end }}
+        silent: true
       - task: 'ci'
       - 'mkdir -p release'
       - >-
