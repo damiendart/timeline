@@ -1,11 +1,18 @@
 {
-    "name": "laravel/laravel",
+    "authors": [
+        {
+            "name": "Damien Dart",
+            "email": "damiendart@pobox.com",
+            "homepage": "https://www.robotinaponcho.net",
+            "role": "Developer"
+        }
+    ],
+    "name": "damiendart/timeline",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "A simple timeline.",
     "license": "MIT",
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^7.4|^8.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
