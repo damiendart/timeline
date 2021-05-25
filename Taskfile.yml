@@ -18,24 +18,26 @@ tasks:
 
   build:
     cmds:
+      - task: 'build:css'
       - task: 'build:javascript'
-      - task: 'build:sass'
     desc: 'Run all building-related tasks'
+
+  build:css:
+    cmds:
+      - 'node_modules/.bin/sass --no-source-map -s compressed resources/sass/app.scss {{ .OUTPUT_FILE }}'
+      - 'postcss --no-map --replace --use autoprefixer --use cssnano -- {{ .OUTPUT_FILE }}'
+    desc: 'Build CSS files with Sass and friends'
+    vars:
+      OUTPUT_FILE: 'public/assets/app.css'
 
   build:javascript:
     cmds:
-      - >-
-        node_modules/.bin/esbuild resources/js/app.js
-        --bundle --log-level=warning --minify
-        --outfile=public/assets/app.js
-    desc: 'Build JavaScript files with esbuild'
-
-  build:sass:
-    cmds:
-      - >-
-        node_modules/.bin/sass --no-source-map -s compressed resources/sass/app.scss
-        | postcss --use autoprefixer --use cssnano --no-map -o public/assets/app.css
-    desc: 'Build CSS files with Sass and friends'
+      - 'node_modules/.bin/esbuild resources/js/app.js --bundle --log-level=warning --outfile={{ .OUTPUT_FILE }}'
+      - 'node_modules/.bin/babel {{ .OUTPUT_FILE }} --out-file {{ .OUTPUT_FILE }} --presets=@babel/preset-env'
+      - 'uglifyjs --compress --mangle -o {{ .OUTPUT_FILE }} -- {{ .OUTPUT_FILE }}'
+    desc: 'Build (IE11-compatible) JavaScript files with esbuild and friends'
+    vars:
+      OUTPUT_FILE: 'public/assets/app.js'
 
   ci:
     cmds:
