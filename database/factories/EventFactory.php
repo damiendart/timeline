@@ -6,26 +6,21 @@ namespace Database\Factories;
 
 use App\Models\Event;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class EventFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
     protected $model = Event::class;
 
-    /**
-     * Define the model's default state.
-     */
     public function definition(): array
     {
+        $title = $this->faker->words(4, true);
+
         return [
             'date' => $this->faker->dateTimeThisDecade(),
-            'title' => $this->faker->text(30),
-            'slug' => $this->faker->slug(4),
             'description' => $this->faker->paragraph(),
+            'slug' => Str::slug($title),
+            'title' => Str::ucfirst($title),
         ];
     }
 }

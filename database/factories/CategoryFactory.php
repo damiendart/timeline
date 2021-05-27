@@ -10,18 +10,15 @@ use Illuminate\Support\Str;
 
 class CategoryFactory extends Factory
 {
-    /**
-     * @var string
-     */
     protected $model = Category::class;
 
     public function definition(): array
     {
-        $title = $this->faker->words(3, true);
+        $title = $this->faker->words(4, true);
 
         return [
-            'title' => Str::ucfirst($title),
             'slug' => Str::slug($title),
+            'title' => Str::ucfirst($title),
         ];
     }
 }
