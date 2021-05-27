@@ -18,27 +18,30 @@ class EventController extends Controller
      */
     public function index(): View
     {
-        $groupedEvents = Event::latest('date')->get()->groupBy(
-            function (Event $event) {
-                return Carbon::parse($event->date)->format('Y');
-            },
-        )->map(
-            function (Collection $years) {
-                return $years->groupBy(
-                    function (Event $event) {
-                        return Carbon::parse($event->date)->format('m');
-                    }
-                )->map(
-                    function (Collection $months) {
-                        return $months->groupBy(
-                            function (Event $event) {
-                                return Carbon::parse($event->date)->format('d');
-                            }
-                        );
-                    }
-                );
-            },
-        );
+        $groupedEvents = Event::latest('date')
+            ->with('category')
+            ->get()
+            ->groupBy(
+                function (Event $event) {
+                    return Carbon::parse($event->date)->format('Y');
+                },
+            )->map(
+                function (Collection $years) {
+                    return $years->groupBy(
+                        function (Event $event) {
+                            return Carbon::parse($event->date)->format('m');
+                        }
+                    )->map(
+                        function (Collection $months) {
+                            return $months->groupBy(
+                                function (Event $event) {
+                                    return Carbon::parse($event->date)->format('d');
+                                }
+                            );
+                        }
+                    );
+                },
+            );
 
         return view(
             'events.index',

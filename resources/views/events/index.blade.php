@@ -16,7 +16,11 @@
                 @foreach ($events as $event)
                     <h5>{{ $event->title }}</h5>
                     <ul>
-                        <li>{{ $event->date }}</li>
+                        <li><strong>Event date:</strong> {{ $event->date }}</li>
+                        @if ($event->category !== null)
+                            <li><strong>Event category:</strong> {{ $event->category->title }}</li>
+                            <li><strong>Event category slug:</strong> {{ $event->category->slug }}</li>
+                        @endif
                     </ul>
                     <p>{{ $event->description }}</p>
                 @endforeach
