@@ -1,0 +1,31 @@
+---
+name: 'Lint and Test Project'
+
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  lint-yaml:
+    name: 'Lint project'
+    runs-on: 'ubuntu-18.04'
+    steps:
+      - name: 'Check out repository'
+        uses: 'actions/checkout@v2'
+
+      - name: 'Set up Node environment'
+        uses: 'actions/setup-node@v2-beta'
+        with:
+          node-version: '14'
+
+      - name: 'Set up PHP environment'
+        uses: 'shivammathur/setup-php@v2'
+        with:
+          php-version: '7.4'
+
+      - name: 'Install Task'
+        run: 'curl -sL https://taskfile.dev/install.sh | sh'
+
+      - name: 'Ensure project builds and run all linting and testing tasks'
+        run: './bin/task ci'
