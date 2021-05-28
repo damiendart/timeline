@@ -7,6 +7,13 @@
 </head>
 <body>
     <h1>Timeline</h1>
+    <hr>
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+
+        <input type="submit" value="{{ __('Logout') }}">
+    </form>
+    <hr>
     @foreach ($groupedEvents as $year => $months)
         <h2>{{ $year }}</h2>
         @foreach ($months as $month => $days)
