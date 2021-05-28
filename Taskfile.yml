@@ -45,6 +45,7 @@ tasks:
       - task: 'dependencies'
       - task: 'build'
       - task: 'lint'
+      - task: 'test'
     desc: 'Run all CI-related tasks'
 
   clean:
@@ -112,3 +113,13 @@ tasks:
     vars:
       GIT_STATUS:
         sh: 'git status --porcelain'
+
+  test:
+    cmds:
+      - task: 'test:php'
+    desc: 'Run all testing-related tasks'
+
+  test:php:
+    cmds:
+      - 'vendor/bin/phpunit'
+    desc: 'Run PHP tests with PHPUnit'
