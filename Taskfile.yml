@@ -44,6 +44,7 @@ tasks:
       - task: 'clean'
       - task: 'directories'
       - task: 'dependencies'
+      - task: 'key-generate'
       - task: 'build'
       - task: 'lint'
       - task: 'test'
@@ -80,6 +81,11 @@ tasks:
     cmds:
       - 'composer install --no-ansi --no-interaction --no-progress'
     desc: 'Install PHP dependencies for building, development, and testing'
+
+  key-generate:
+    cmds:
+      - './private/bin/artisan key:generate'
+    desc: 'Generate and set an application key'
 
   lint:
     cmds:
