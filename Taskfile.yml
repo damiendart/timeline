@@ -84,6 +84,7 @@ tasks:
 
   key-generate:
     cmds:
+      - 'cp -n .env.example .env'
       - './private/bin/artisan key:generate'
     desc: 'Generate and set an application key'
 
