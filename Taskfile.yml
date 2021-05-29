@@ -42,6 +42,7 @@ tasks:
   ci:
     cmds:
       - task: 'clean'
+      - task: 'directories'
       - task: 'dependencies'
       - task: 'build'
       - task: 'lint'
@@ -52,6 +53,14 @@ tasks:
     cmds:
       - 'rm -fr node_modules public/assets release vendor'
     desc: 'Delete all buildable files and third-party dependencies'
+
+  directories:
+    cmds:
+      - 'mkdir -p bootstrap/cache'
+      - 'mkdir -p storage/app/public'
+      - 'mkdir -p storage/framework/{cache/data,sessions,testing,views}'
+      - 'mkdir -p storage/logs'
+    desc: 'Create Laravel cache and storage directories'
 
   dependencies:
     cmds:

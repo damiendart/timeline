@@ -7,8 +7,8 @@ on:
       - 'master'
 
 jobs:
-  lint-yaml:
-    name: 'Lint project'
+  lint-and-test:
+    name: 'Lint and test project'
     runs-on: 'ubuntu-18.04'
     steps:
       - name: 'Check out repository'
@@ -22,6 +22,9 @@ jobs:
       - name: 'Set up PHP environment'
         uses: 'shivammathur/setup-php@v2'
         with:
+          # The following extension list based on the one from
+          # <https://github.com/laravel/framework/blob/8.x/.github/workflows/tests.yml>.
+          extensions: 'dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd'
           php-version: '7.4'
 
       - name: 'Install Task'
@@ -29,3 +32,6 @@ jobs:
 
       - name: 'Ensure project builds and run all linting and testing tasks'
         run: './bin/task ci'
+        env:
+          DB_CONNECTION: 'sqlite'
+          DB_DATABASE: ':memory:'
