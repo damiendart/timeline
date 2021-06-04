@@ -11,7 +11,8 @@ class AddCategoryIdColumnToEventsTable extends Migration
     public function up(): void
     {
         Schema::table('events', function (Blueprint $table): void {
-            $table->foreignId('category_id')
+            $table
+                ->foreignId('category_id')
                 ->nullable()
                 ->constrained();
         });
