@@ -8,7 +8,7 @@
         @csrf
 
         @if (session('status'))
-            <p><strong>{{ $status }}</strong></p>
+            <p><strong>{{ session('status') }}</strong></p>
         @endif
 
         @if ($errors->any())
@@ -38,4 +38,5 @@
 
         <input type="submit" value="{{ __('Log in') }}">
     </form>
+    <p><a href="{{ route('register') }}">Create an account</a></p>
 @endsection
