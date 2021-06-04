@@ -1,13 +1,8 @@
-<!doctype html>
-<html lang=en>
-<head>
-    <meta charset=utf-8>
-    <link href="/assets/app.css" rel="stylesheet">
-    <title>Timeline</title>
-</head>
-<body>
-    <h1>Timeline</h1>
-    <hr>
+@extends('layouts.app')
+
+@section('title', 'Overview')
+
+@section('body')
     <form method="POST" action="{{ route('logout') }}">
         @csrf
 
@@ -34,6 +29,4 @@
             @endforeach
         @endforeach
     @endforeach
-    <script async src="/assets/app.js"></script>
-</body>
-</html>
+@endsection

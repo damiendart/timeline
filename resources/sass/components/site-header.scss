@@ -1,0 +1,40 @@
+@use "../variables";
+@use "../../../node_modules/toolbox-sass";
+
+.site-header {
+  border-bottom: toolbox-sass.$base-one-pixel-in-rem solid variables.$colour-grey;
+  background: variables.$colour-white;
+  box-sizing: border-box;
+  padding: variables.$base-line-height 0 (variables.$base-line-height - toolbox-sass.$base-one-pixel-in-rem);
+
+  a {
+    text-decoration: none;
+    color: inherit;
+
+    &:focus, &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: variables.$base-content-width;
+    padding: 0 variables.$base-line-height;
+  }
+
+  &__heading {
+    font-size: 125%;
+    line-height: variables.$base-line-height;
+    margin: 0;
+
+    @media #{toolbox-sass.$media-small-up} {
+      font-size: 150%;
+    }
+  }
+
+  &__rule {
+    display: none;
+  }
+}

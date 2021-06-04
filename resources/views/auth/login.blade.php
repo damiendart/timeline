@@ -1,11 +1,8 @@
-<!doctype html>
-<html lang=en>
-<head>
-    <meta charset=utf-8>
-    <link href="/assets/app.css" rel="stylesheet">
-    <title>Timeline</title>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('title', 'Login')
+
+@section('body')
     <h1>Login</h1>
     <form method="POST" action="{{ route('login') }}">
         @csrf
@@ -41,5 +38,4 @@
 
         <input type="submit" value="{{ __('Log in') }}">
     </form>
-</body>
-</html>
+@endsection

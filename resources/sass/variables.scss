@@ -1,0 +1,13 @@
+@use "sass:math";
+@use "../../node_modules/toolbox-sass";
+
+$base-content-width: math.div(1080px, 16px) * 1rem;
+$base-font-size: 16px;
+$base-font-stack: toolbox-sass.$font-stack-system;
+$base-line-height: 1.5rem;
+
+$colour-black: #000000;
+$colour-blue: #2e86de;
+$colour-grey: #cccccc;
+$colour-off-white: #f9f9f9;
+$colour-white: #ffffff;

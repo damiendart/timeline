@@ -13,6 +13,7 @@
     "postcss": "^8.3.0",
     "postcss-cli": "^8.3.1",
     "sass": "^1.33.0",
+    "toolbox-sass": "git+https://www.robotinaponcho.net/git/toolbox-sass.git#f362fc7ab2b91386fa6bf3a49dc82bcefe846c20",
     "uglify-js": "^3.13.7"
   }
 }
