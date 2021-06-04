@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature;
+namespace Tests\Feature\Auth;
 
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -24,7 +24,7 @@ class AuthenticationTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testUsersCanAuthenticateUsingTheLoginScreen(): void
+    public function testUsersCanAuthenticate(): void
     {
         $user = User::factory()->create();
         $response = $this->post(
