@@ -1,0 +1,72 @@
+@use "sass:math";
+@use "../variables";
+@use "../../../node_modules/toolbox-sass";
+
+.dropdown {
+  position: relative;
+
+  @at-root {
+    html:not(.javascript) {
+      .dropdown:hover {
+        .dropdown__menu {
+          visibility: visible;
+        }
+      }
+
+      .dropdown:focus-visible {
+        .dropdown__menu {
+          visibility: visible;
+        }
+      }
+    }
+  }
+
+  button,
+  input[type="submit"] {
+    -webkit-appearance: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: bold;
+    line-height: inherit;
+    margin: 0;
+    padding: 0;
+
+    &:focus,
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__heading {
+    &::after {
+      content: "\00A0\25BC";
+      display: inline-block;
+    }
+  }
+
+  &__menu {
+    background: variables.$colour-white;
+    border: toolbox-sass.$base-one-pixel-in-rem solid variables.$colour-grey;
+    border-radius: math.div(variables.$base-line-height, 2);
+    list-style: none;
+    margin: 0;
+    right: 0;
+    padding: math.div(variables.$base-line-height, 2);
+    position: absolute;
+    top: calc(100% + #{math.div(variables.$base-line-height, 4)});
+    visibility: hidden;
+
+    &[aria-hidden='false'] {
+      visibility: visible;
+    }
+
+    &__item {
+      a {
+        white-space: pre;
+      }
+    }
+  }
+}

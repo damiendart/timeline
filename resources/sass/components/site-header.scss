@@ -1,3 +1,4 @@
+@use "sass:math";
 @use "../variables";
 @use "../../../node_modules/toolbox-sass";
 
@@ -31,6 +32,21 @@
 
     @media #{toolbox-sass.$media-small-up} {
       font-size: 150%;
+    }
+  }
+
+  &__navigation-list {
+    display: flex;
+    font-weight: bold;
+    flex-direction: row;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    &__item {
+      & + & {
+        margin: 0 0 0 variables.$base-line-height;
+      }
     }
   }
 
