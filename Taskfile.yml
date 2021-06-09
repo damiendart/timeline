@@ -137,5 +137,5 @@ tasks:
 
   test:php:
     cmds:
-      - 'vendor/bin/phpunit'
+      - 'vendor/bin/phpunit --testdox'
     desc: 'Run PHP tests with PHPUnit'
