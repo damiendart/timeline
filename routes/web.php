@@ -12,8 +12,10 @@ Route::middleware(['auth'])->group(
         Route::get('/', [EventController::class, 'index'])->name('home');
         Route::redirect('/events', '/');
         Route::resource('events', EventController::class)->except(['index']);
-        Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+
+        Route::get('/logout', [AuthenticatedSessionController::class, 'edit'])
             ->name('logout');
+        Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
     }
 );
 

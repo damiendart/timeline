@@ -26,6 +26,11 @@ class AuthenticatedSessionController extends Controller
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
+    public function edit()
+    {
+        return view('auth.logout');
+    }
+
     public function destroy(Request $request)
     {
         Auth::guard('web')->logout();
@@ -33,6 +38,6 @@ class AuthenticatedSessionController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect()->route('login');
     }
 }
