@@ -59,6 +59,7 @@ tasks:
     cmds:
       - 'mkdir -p bootstrap/cache'
       - 'mkdir -p storage/app/public'
+      - 'mkdir -p storage/clockwork'
       - 'mkdir -p storage/framework/{cache/data,sessions,testing,views}'
       - 'mkdir -p storage/logs'
     desc: 'Create Laravel cache and storage directories'
