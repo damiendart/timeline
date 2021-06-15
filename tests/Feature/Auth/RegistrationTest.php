@@ -26,14 +26,14 @@ class RegistrationTest extends TestCase
         'password_confirmation' => 'pXGnUJ3qN4',
     ];
 
-    public function testRegistrationScreenCanBeRendered(): void
+    public function testRegistrationScreenCanBeRenderedForUnauthenticatedUsers(): void
     {
         $response = $this->get('/register');
 
         $response->assertStatus(200);
     }
 
-    public function testNewUsersCanRegister(): void
+    public function testUnauthenticatedUsersCanRegister(): void
     {
         Event::fake();
 
@@ -43,7 +43,7 @@ class RegistrationTest extends TestCase
         $response->assertRedirect('/login');
     }
 
-    public function testAuthenticatedUsersCannotGetToRegisterScreen(): void
+    public function testAuthenticatedUsersCannotGetToRegistrationScreen(): void
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user)->get('/register');

@@ -26,13 +26,6 @@ class LogoutTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testUnauthenticatedUsersCannotGetToLogoutScreen(): void
-    {
-        $response = $this->get('/logout');
-
-        $response->assertRedirect('/login');
-    }
-
     public function testAuthenticatedUsersCanLogout(): void
     {
         $response = $this
@@ -40,6 +33,13 @@ class LogoutTest extends TestCase
             ->post('/logout');
 
         $this->assertGuest();
+        $response->assertRedirect('/login');
+    }
+
+    public function testUnauthenticatedUsersCannotGetToLogoutScreen(): void
+    {
+        $response = $this->get('/logout');
+
         $response->assertRedirect('/login');
     }
 
