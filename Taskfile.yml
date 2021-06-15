@@ -62,6 +62,8 @@ tasks:
       - 'mkdir -p storage/clockwork'
       - 'mkdir -p storage/framework/{cache/data,sessions,testing,views}'
       - 'mkdir -p storage/logs'
+      - cmd: 'echo NOTE: You may need to update owners and permissions of the freshly-created folders!'
+        silent: true
     desc: 'Create Laravel cache and storage directories'
 
   dependencies:
