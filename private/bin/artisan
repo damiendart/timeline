@@ -1,4 +1,4 @@
-#!/usr/bin/env php
+#!/usr/bin/env php8.0
 <?php
 
 declare(strict_types=1);
