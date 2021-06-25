@@ -16,7 +16,7 @@ class LogoutTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testLogoutScreenCanBeRenderedForAuthenticatedUsers(): void
+    public function testAuthenticatedUsersCanGetToLogoutScreen(): void
     {
         $response = $this
             ->actingAs(User::factory()->create())

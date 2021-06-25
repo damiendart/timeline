@@ -26,7 +26,7 @@ class RegistrationTest extends TestCase
         'password_confirmation' => 'pXGnUJ3qN4',
     ];
 
-    public function testRegistrationScreenCanBeRenderedForUnauthenticatedUsers(): void
+    public function testUnauthenticatedUsersCanGetToRegistrationScreen(): void
     {
         $response = $this->get('/register');
 

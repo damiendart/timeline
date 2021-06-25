@@ -17,7 +17,7 @@ class AuthenticationTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testLoginScreenCanBeRenderedForUnauthenticatedUsers(): void
+    public function testUnauthenticatedUsersCanGetToLoginScreen(): void
     {
         $response = $this->get('/login');
 
@@ -39,7 +39,7 @@ class AuthenticationTest extends TestCase
         $response->assertRedirect(RouteServiceProvider::HOME);
     }
 
-    public function testUnauthenticatedUsersCanNotAuthenticateWithInvalidCredentials(): void
+    public function testUnauthenticatedUsersCannotAuthenticateWithInvalidCredentials(): void
     {
         $user = User::factory()->create();
 
