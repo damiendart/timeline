@@ -9,7 +9,7 @@
   ],
   "name": "damiendart/timeline",
   "type": "project",
-  "description": "A simple timeline.",
+  "description": "A simple Laravel-powered timeline.",
   "license": "MIT",
   "require": {
     "php": "^8.0",
