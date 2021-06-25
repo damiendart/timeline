@@ -18,9 +18,15 @@ tasks:
 
   build:
     cmds:
+      - task: 'build:assets'
       - task: 'build:css'
       - task: 'build:javascript'
     desc: 'Run all building-related tasks'
+
+  build:assets:
+    cmds:
+      - 'cp -rTv ./node_modules/assets/timeline ./public'
+    desc: 'Copy pre-built assets'
 
   build:css:
     cmds:

@@ -6,11 +6,12 @@
   border-bottom: toolbox-sass.$base-one-pixel-in-rem solid variables.$colour-grey;
   background: variables.$colour-white;
   box-sizing: border-box;
+  font-family: variables.$base-font-stack-heading;
   padding: variables.$base-line-height 0 (variables.$base-line-height - toolbox-sass.$base-one-pixel-in-rem);
 
   a {
-    text-decoration: none;
     color: inherit;
+    text-decoration: none;
 
     &:focus, &:hover {
       text-decoration: underline;
