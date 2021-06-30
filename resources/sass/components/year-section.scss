@@ -1,0 +1,17 @@
+@use "../variables";
+
+.year-section {
+  background: variables.$colour-off-white;
+  color: variables.$colour-black;
+  padding: (variables.$base-line-height * 3) 0;
+  transform: skewY(-2deg);
+
+  &:nth-child(odd) {
+    background: variables.$colour-black;
+    color: variables.$colour-white;
+  }
+
+  &__container {
+    transform: skewY(2deg);
+  }
+}

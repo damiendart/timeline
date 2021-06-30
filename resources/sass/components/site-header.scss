@@ -8,6 +8,8 @@
   box-sizing: border-box;
   font-family: variables.$base-font-stack-heading;
   padding: variables.$base-line-height 0 (variables.$base-line-height - toolbox-sass.$base-one-pixel-in-rem);
+  position: relative;
+  z-index: 9;
 
   a {
     color: inherit;

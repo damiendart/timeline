@@ -29,3 +29,7 @@ body {
 html {
   height: 100%;
 }
+
+p {
+  margin: math.div(variables.$base-line-height, 2) 0 0;
+}

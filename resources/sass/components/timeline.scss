@@ -1,0 +1,77 @@
+@use "sass:math";
+@use "../variables";
+@use "../../../node_modules/toolbox-sass";
+
+.timeline {
+  margin: 0 auto;
+  max-width: variables.$base-content-width;
+  padding: 0 variables.$base-line-height;
+
+  @media #{toolbox-sass.$media-medium-up} {
+    padding: 0 (variables.$base-line-height * 2);
+  }
+
+  & + & {
+    margin: variables.$base-line-height auto 0;
+  }
+
+  &__heading {
+    font-family: variables.$base-font-stack-heading;
+    font-size: 200%;
+    font-weight: bold;
+    line-height: variables.$base-line-height;
+    margin: 0;
+    text-align: center;
+  }
+
+  &__items {
+    $line-width: math.div(variables.$base-line-height, 4);
+
+    margin: variables.$base-line-height 0 0;
+    position: relative;
+    padding: (variables.$base-line-height * 2) 0;
+
+    &::before {
+      background: currentColor;
+      content: "";
+      display: block;
+      height: 100%;
+      left: 50%;
+      position: absolute;
+      top: 0;
+      transform: translateX(-50%);
+      width: $line-width;
+    }
+
+    &__item {
+      position: relative;
+      width: calc(50% - #{math.div($line-width, 2) + (variables.$base-line-height * 2)});
+
+      &::before {
+        background: currentColor;
+        border-radius: 50%;
+        content: "";
+        display: block;
+        height: variables.$base-line-height;
+        position: absolute;
+        right: variables.$base-line-height * (-2.5 - math.div(1, 8));
+        top: 50%;
+        transform: translateY(-50%);
+        width: variables.$base-line-height;
+      }
+
+      & + & {
+        margin-top: variables.$base-line-height * 2;
+      }
+
+      &--reverse {
+        margin-left: auto;
+
+        &::before {
+          left: variables.$base-line-height * (-2.5 - math.div(1, 8));
+          right: auto;
+        }
+      }
+    }
+  }
+}
