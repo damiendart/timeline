@@ -33,3 +33,7 @@ html {
 p {
   margin: math.div(variables.$base-line-height, 2) 0 0;
 }
+
+[name] {
+  scroll-margin-top: variables.$base-line-height * 3;
+}

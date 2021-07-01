@@ -23,6 +23,16 @@
       line-height: variables.$base-line-height * 1.5;
       margin: 0;
       order: 2;
+
+      a {
+        text-decoration-color: transparent;
+        color: inherit;
+
+        &:focus,
+        &:hover {
+          text-decoration-color: inherit;
+        }
+      }
     }
   }
 }

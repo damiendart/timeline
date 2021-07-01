@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
@@ -63,11 +64,9 @@ class EventController extends Controller
     {
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Event $event): Response
+    public function show(Event $event): RedirectResponse
     {
+        return redirect()->route('home')->withFragment($event->slug);
     }
 
     /**
