@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateEventRequest;
 use App\Models\Event;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -69,24 +70,25 @@ class EventController extends Controller
         return redirect()->route('home')->withFragment($event->slug);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Event $event): Response
+    public function edit(Event $event): View
     {
+        return view(
+            'events.edit',
+            ['event' => $event],
+        );
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Event $event): Response
+    public function update(UpdateEventRequest $request, Event $event): RedirectResponse
     {
+        $event->update($request->all());
+
+        return redirect()->route('home')->withFragment($event->slug);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Event $event): Response
+    public function destroy(Event $event): RedirectResponse
     {
+        $event->delete();
+
+        return redirect()->route('home');
     }
 }

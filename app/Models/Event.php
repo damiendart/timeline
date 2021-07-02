@@ -16,6 +16,13 @@ class Event extends Model
         'date' => 'datetime:Y-m-d',
     ];
 
+    protected $fillable = [
+        'date',
+        'description',
+        'slug',
+        'title',
+    ];
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
