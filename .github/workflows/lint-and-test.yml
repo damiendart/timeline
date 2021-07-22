@@ -38,6 +38,3 @@ jobs:
 
       - name: 'Ensure project builds and run all linting and testing tasks'
         run: './bin/task ci'
-        env:
-          DB_CONNECTION: 'sqlite'
-          DB_DATABASE: ':memory:'
