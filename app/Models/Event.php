@@ -7,6 +7,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 
 class Event extends Model
 {
@@ -26,6 +28,34 @@ class Event extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function getAllEventsGroupedByDate(): Collection
+    {
+        return $this->latest('date')
+            ->with('category')
+            ->get()
+            ->groupBy(
+                function (Event $event) {
+                    return Carbon::parse($event->date)->format('Y');
+                },
+            )->map(
+                function (Collection $years) {
+                    return $years->groupBy(
+                        function (Event $event) {
+                            return Carbon::parse($event->date)->format('m');
+                        }
+                    )->map(
+                        function (Collection $months) {
+                            return $months->groupBy(
+                                function (Event $event) {
+                                    return Carbon::parse($event->date)->format('d');
+                                }
+                            );
+                        }
+                    );
+                },
+            );
     }
 
     public function getRouteKeyName(): string

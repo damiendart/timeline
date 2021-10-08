@@ -9,8 +9,6 @@ use App\Models\Event;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Collection;
 use Illuminate\View\View;
 
 class EventController extends Controller
@@ -18,36 +16,11 @@ class EventController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Event $event): View
     {
-        $groupedEvents = Event::latest('date')
-            ->with('category')
-            ->get()
-            ->groupBy(
-                function (Event $event) {
-                    return Carbon::parse($event->date)->format('Y');
-                },
-            )->map(
-                function (Collection $years) {
-                    return $years->groupBy(
-                        function (Event $event) {
-                            return Carbon::parse($event->date)->format('m');
-                        }
-                    )->map(
-                        function (Collection $months) {
-                            return $months->groupBy(
-                                function (Event $event) {
-                                    return Carbon::parse($event->date)->format('d');
-                                }
-                            );
-                        }
-                    );
-                },
-            );
-
         return view(
             'events.index',
-            ['groupedEvents' => $groupedEvents],
+            ['groupedEvents' => $event->getAllEventsGroupedByDate()],
         );
     }
 
