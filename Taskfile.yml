@@ -144,15 +144,15 @@ tasks:
       - task: 'test:php'
     desc: 'Run all testing-related tasks'
 
-  # As some of the PHP tests use the "RefreshDatabase" trait, an
-  # in-memory SQLite database is used by default to prevent any
-  # unintended database-ruining. Task supports overriding environment
-  # variables if you want to use a different database; for more
-  # information, see <https://taskfile.dev/#/usage?id=variables>.
+  # As the majority of the PHP feature tests use the "RefreshDatabase"
+  # trait, an in-memory SQLite database is used by default when running
+  # tests to prevent any unintended database-ruining. Task supports
+  # overriding environment variables if you want to use a different
+  # database (see <https://taskfile.dev/#/usage?id=variables>).
   test:php:
     cmds:
       - 'vendor/bin/phpunit --testdox'
-    desc: 'Run PHP tests with PHPUnit, using an in-memory SQLite database'
+    desc: 'Run PHP tests with PHPUnit using an in-memory SQLite database'
     env:
       DB_CONNECTION: 'sqlite'
       DB_DATABASE: ':memory:'
