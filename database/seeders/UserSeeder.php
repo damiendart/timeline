@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use Database\Factories\UserFactory;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
 {
-    public function run(): void
+    public function run(UserFactory $userFactory): void
     {
-        User::factory()->count(1)->create();
+        $userFactory->count(1)->create();
     }
 }

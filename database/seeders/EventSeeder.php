@@ -4,16 +4,13 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\Event;
+use Database\Factories\EventFactory;
 use Illuminate\Database\Seeder;
 
 class EventSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run(EventFactory $eventFactory): void
     {
-        Event::factory()->count(250)->create();
+        $eventFactory->count(250)->create();
     }
 }
