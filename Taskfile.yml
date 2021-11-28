@@ -139,6 +139,16 @@ tasks:
       GIT_STATUS:
         sh: 'git status --porcelain'
 
+  static-analysis:
+    cmds:
+      - task: 'static-analysis:php'
+    desc: 'Run all static-analysis-related tasks'
+
+  static-analysis:php:
+    cmds:
+      - 'vendor/bin/phpstan analyse --no-progress'
+    desc: 'Analyse PHP files with PHPStan and Larastan'
+
   test:
     cmds:
       - task: 'test:php'
