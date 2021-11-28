@@ -1,3 +1,7 @@
+// Copyright (C) 2021 Damien Dart, <damiendart@pobox.com>.
+// This file is distributed under the MIT licence. For more information,
+// please refer to the accompanying "LICENCE" file.
+
 class Dropdown {
   constructor(containerElement) {
     this.buttonElement = document.createElement('button');
