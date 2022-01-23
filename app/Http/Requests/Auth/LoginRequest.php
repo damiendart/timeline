@@ -40,7 +40,7 @@ class LoginRequest extends FormRequest
         if (
             !Auth::attempt(
                 $this->only('email', 'password'),
-                $this->boolean('remember')
+                $this->boolean('remember'),
             )
         ) {
             RateLimiter::hit($this->throttleKey());
@@ -48,7 +48,7 @@ class LoginRequest extends FormRequest
             throw ValidationException::withMessages(
                 [
                     'email' => __('auth.failed'),
-                ]
+                ],
             );
         }
 
@@ -75,9 +75,9 @@ class LoginRequest extends FormRequest
                     [
                         'seconds' => $seconds,
                         'minutes' => ceil($seconds / 60),
-                    ]
+                    ],
                 ),
-            ]
+            ],
         );
     }
 

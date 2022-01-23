@@ -48,15 +48,15 @@ class Event extends Model
                     return $years->groupBy(
                         function (Event $event) {
                             return Carbon::parse($event->date)->format('m');
-                        }
+                        },
                     )->map(
                         function (Collection $months) {
                             return $months->groupBy(
                                 function (Event $event) {
                                     return Carbon::parse($event->date)->format('d');
-                                }
+                                },
                             );
-                        }
+                        },
                     );
                 },
             );

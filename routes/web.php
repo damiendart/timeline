@@ -20,7 +20,7 @@ Route::middleware(['auth'])->group(
         Route::get('/logout', [AuthenticatedSessionController::class, 'edit'])
             ->name('logout');
         Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
-    }
+    },
 );
 
 Route::middleware(['guest'])->group(
@@ -32,5 +32,5 @@ Route::middleware(['guest'])->group(
         Route::get('/register', [RegisteredUserController::class, 'create'])
             ->name('register');
         Route::post('/register', [RegisteredUserController::class, 'store']);
-    }
+    },
 );

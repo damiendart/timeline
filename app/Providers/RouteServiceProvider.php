@@ -18,10 +18,12 @@ class RouteServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        $this->routes(function (): void {
-            Route::middleware('web')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/web.php'));
-        });
+        $this->routes(
+            function (): void {
+                Route::middleware('web')
+                    ->namespace($this->namespace)
+                    ->group(base_path('routes/web.php'));
+            },
+        );
     }
 }

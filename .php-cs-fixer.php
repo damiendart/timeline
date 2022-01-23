@@ -15,7 +15,12 @@ return (new PhpCsFixer\Config())
         'declare_strict_types' => true,
         'ordered_imports' => ['sort_algorithm' => 'alpha'],
         'no_unused_imports' => true,
-        'multiline_whitespace_before_semicolons' => ['strategy' => 'no_multi_line'],
+        'multiline_whitespace_before_semicolons' => [
+            'strategy' => 'no_multi_line'
+        ],
+        'trailing_comma_in_multiline' => [
+            'elements' => ['arrays', 'arguments', 'parameters'],
+        ],
         'void_return' => true,
     ])
     ->setFinder(
