@@ -28,12 +28,12 @@ class UserFactory extends Factory
         ];
     }
 
-    public function unverified(): Factory
+    public function unverified(): static
     {
-        return $this->state(function (array $attributes): array {
-            return [
-                'email_verified_at' => null,
-            ];
-        });
+        return $this->state(
+            function (): array {
+                return ['email_verified_at' => null];
+            },
+        );
     }
 }
