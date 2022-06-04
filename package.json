@@ -1,11 +1,11 @@
 {
   "private": true,
   "devDependencies": {
-    "esbuild": "^0.12.29",
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.25.3",
-    "sass": "^1.43.5"
+    "esbuild": "^0.14.42",
+    "eslint": "^8.17.0",
+    "eslint-config-airbnb-base": "^15",
+    "eslint-plugin-import": "^2.26.0",
+    "sass": "^1.52.2"
   },
   "optionalDependencies": {
     "assets": "git+ssh://git@github.com/damiendart/assets.git#a79f155e670732289ecd662e71468f37398fe3b9"
