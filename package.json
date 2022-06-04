@@ -5,8 +5,7 @@
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.25.3",
-    "sass": "^1.43.5",
-    "toolbox-sass": "git+https://www.robotinaponcho.net/git/toolbox-sass.git#f362fc7ab2b91386fa6bf3a49dc82bcefe846c20"
+    "sass": "^1.43.5"
   },
   "optionalDependencies": {
     "assets": "git+ssh://git@github.com/damiendart/assets.git#a79f155e670732289ecd662e71468f37398fe3b9"

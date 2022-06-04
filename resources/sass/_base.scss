@@ -1,6 +1,10 @@
+// Copyright (C) 2022 Damien Dart, <damiendart@pobox.com>.
+// This file is distributed under the MIT licence. For more information,
+// please refer to the accompanying "LICENCE" file.
+
 @use "sass:math";
+@use "mixins";
 @use "variables";
-@use "../../node_modules/toolbox-sass";
 
 a {
   color: variables.$colour-blue;
@@ -15,11 +19,9 @@ a {
 }
 
 body {
-  @include toolbox-sass.nice-font-rendering;
-
   background: variables.$colour-white;
   color: variables.$colour-black;
-  font-size: percentage(math.div(variables.$base-font-size, 16px));
+  font-size: 100%;
   font-family: variables.$base-font-stack;
   height: 100%;
   line-height: variables.$base-line-height;
@@ -27,7 +29,15 @@ body {
 }
 
 html {
-  height: 100%;
+  font-size: percentage(math.div(14px, 16px));
+
+  @include mixins.breakpoint-up(small) {
+    font-size: 100%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    scroll-behavior: smooth;
+  }
 }
 
 p {

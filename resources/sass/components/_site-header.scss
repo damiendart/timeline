@@ -1,13 +1,14 @@
 @use "sass:math";
+@use "../functions";
+@use "../mixins";
 @use "../variables";
-@use "../../../node_modules/toolbox-sass";
 
 .site-header {
-  border-bottom: toolbox-sass.$base-one-pixel-in-rem solid variables.$colour-grey;
+  border-bottom: functions.px-to-rem(1px) solid variables.$colour-grey;
   background: variables.$colour-white;
   box-sizing: border-box;
   font-family: variables.$base-font-stack-heading;
-  padding: variables.$base-line-height 0 (variables.$base-line-height - toolbox-sass.$base-one-pixel-in-rem);
+  padding: variables.$base-line-height 0 (variables.$base-line-height - functions.px-to-rem(1px));
   position: relative;
   z-index: 9;
 
@@ -24,7 +25,7 @@
     display: flex;
     justify-content: space-between;
     margin: 0 auto;
-    max-width: variables.$base-content-width;
+    max-width: variables.$content-width;
     padding: 0 variables.$base-line-height;
   }
 
@@ -33,7 +34,7 @@
     line-height: variables.$base-line-height;
     margin: 0;
 
-    @media #{toolbox-sass.$media-small-up} {
+    @include mixins.breakpoint-up(small) {
       font-size: 150%;
     }
   }

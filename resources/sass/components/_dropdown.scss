@@ -1,6 +1,6 @@
 @use "sass:math";
+@use "../functions";
 @use "../variables";
-@use "../../../node_modules/toolbox-sass";
 
 .dropdown {
   position: relative;
@@ -49,7 +49,7 @@
 
   &__menu {
     background: variables.$colour-white;
-    border: toolbox-sass.$base-one-pixel-in-rem solid variables.$colour-grey;
+    border: functions.px-to-rem(1px) solid variables.$colour-grey;
     border-radius: math.div(variables.$base-line-height, 2);
     list-style: none;
     margin: 0;
