@@ -1,6 +1,7 @@
 {
   "private": true,
-  "devDependencies": {
+  "dependencies": {
+    "@parcel/css-cli": "^1.9.0",
     "esbuild": "^0.14.42",
     "eslint": "^8.17.0",
     "eslint-config-airbnb-base": "^15",

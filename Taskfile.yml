@@ -30,8 +30,9 @@ tasks:
 
   build:css:
     cmds:
-      - 'node_modules/.bin/sass --no-source-map -s compressed resources/sass/app.scss {{ .OUTPUT_FILE }}'
-    desc: 'Build CSS files with Sass'
+      - 'node_modules/.bin/sass --no-source-map resources/sass/app.scss {{ .OUTPUT_FILE }}'
+      - 'node_modules/.bin/parcel-css --minify --targets ">= 0.25%" {{ .OUTPUT_FILE }} -o {{ .OUTPUT_FILE}}'
+    desc: 'Build CSS files with Sass and friends'
     vars:
       OUTPUT_FILE: 'public/assets/app.css'
 
