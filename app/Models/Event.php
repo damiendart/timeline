@@ -17,10 +17,12 @@ class Event extends Model
 {
     use HasFactory;
 
+    /** {@inheritdoc} */
     protected $casts = [
         'date' => 'datetime:Y-m-d',
     ];
 
+    /** {@inheritdoc} */
     protected $fillable = [
         'date',
         'description',

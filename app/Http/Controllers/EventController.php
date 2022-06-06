@@ -36,6 +36,7 @@ class EventController extends Controller
      */
     public function create(): Response
     {
+        return response()->noContent();
     }
 
     /**
@@ -43,6 +44,7 @@ class EventController extends Controller
      */
     public function store(Request $request): Response
     {
+        return response()->noContent();
     }
 
     public function show(Event $event): RedirectResponse

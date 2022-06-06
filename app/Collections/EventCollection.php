@@ -19,20 +19,25 @@ class EventCollection extends EloquentCollection
     {
         return $this
             ->groupBy(
+                /** @phpstan-ignore-next-line */
                 function (Event $event): string {
                     return Carbon::parse($event->date)->format('Y');
                 },
             )->map(
                 function (Collection $years) {
                     return $years->groupBy(
+                        /** @phpstan-ignore-next-line */
                         function (Event $event): string {
                             return Carbon::parse($event->date)->format('m');
                         },
                     )->map(
                         function (Collection $months) {
+                            /** @phpstan-ignore-next-line */
                             return $months->groupBy(
+                                /** @phpstan-ignore-next-line */
                                 function (Event $event): string {
-                                    return Carbon::parse($event->date)->format('d');
+                                    return Carbon::parse($event->date)
+                                        ->format('d');
                                 },
                             );
                         },
