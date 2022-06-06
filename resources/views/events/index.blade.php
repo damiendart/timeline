@@ -5,8 +5,10 @@
 @section('body')
     @php
         $reverse = false;
+
+        /** @var \App\Collections\EventCollection $events */
     @endphp
-    @foreach ($groupedEvents as $year => $months)
+    @foreach ($events->groupByDate() as $year => $months)
         <div class="year-section year-section--{{ $year }}" id="{{ $year }}">
             <div class="year-section__container">
                 @foreach ($months as $month => $days)
@@ -19,9 +21,6 @@
                                 @endphp
                                 @foreach ($events as $event)
                                     <div class="timeline__items__item{{ $reverse ? ' timeline__items__item--reverse' : '' }}">
-                                        @php
-                                            /** @var \App\Models\Event $event */
-                                        @endphp
                                         <div class="event-card event-card--{{ $event->category?->slug ?? 'generic' }}">
                                             <div class="event-card__header">
                                                 <h3 class="event-card__header__title"><a name="{{ $event->slug }}" href="#{{ $event->slug }}">{{ $event->title }}</a></h3>

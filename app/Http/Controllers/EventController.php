@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Collections\EventCollection;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\Event;
 use Illuminate\Http\RedirectResponse;
@@ -22,10 +23,12 @@ class EventController extends Controller
      */
     public function index(Event $event): View
     {
-        return view(
-            'events.index',
-            ['groupedEvents' => $event->getAllEventsGroupedByDate()],
-        );
+        /** @var EventCollection $events */
+        $events = $event->latest('date')
+            ->with('category')
+            ->get();
+
+        return view('events.index', ['events' => $events]);
     }
 
     /**

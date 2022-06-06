@@ -8,11 +8,10 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Collections\EventCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Collection;
 
 class Event extends Model
 {
@@ -34,36 +33,13 @@ class Event extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function getAllEventsGroupedByDate(): Collection
-    {
-        return $this->latest('date')
-            ->with('category')
-            ->get()
-            ->groupBy(
-                function (Event $event) {
-                    return Carbon::parse($event->date)->format('Y');
-                },
-            )->map(
-                function (Collection $years) {
-                    return $years->groupBy(
-                        function (Event $event) {
-                            return Carbon::parse($event->date)->format('m');
-                        },
-                    )->map(
-                        function (Collection $months) {
-                            return $months->groupBy(
-                                function (Event $event) {
-                                    return Carbon::parse($event->date)->format('d');
-                                },
-                            );
-                        },
-                    );
-                },
-            );
-    }
-
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    public function newCollection(array $models = []): EventCollection
+    {
+        return new EventCollection($models);
     }
 }
