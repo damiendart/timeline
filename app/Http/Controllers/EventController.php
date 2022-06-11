@@ -9,11 +9,10 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Collections\EventCollection;
+use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\Event;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
@@ -56,17 +55,21 @@ class EventController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): Response
+    public function create(): View
     {
-        return response()->noContent();
+        return view('events.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): Response
+    public function store(StoreEventRequest $request, Event $event): RedirectResponse
     {
-        return response()->noContent();
+        $newEvent = $event->create($request->all());
+
+        return redirect()
+            ->route('year', ['year' => $newEvent->date->year])
+            ->withFragment($newEvent->slug);
     }
 
     public function show(Event $event): RedirectResponse

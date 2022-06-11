@@ -15,6 +15,7 @@
                 </div>
                 <ul class="site-header__navigation-list">
                     @auth
+                        <li class="site-header__navigation-list__item"><a href="{{ route('events.create') }}">{{ __('Add an event') }}</a></li>
                         <li class="dropdown site-header__navigation-list__item">
                             <span class="dropdown__heading">{{ auth()->user()->name }}</span>
                             <ul class="dropdown__menu" role="menu">
