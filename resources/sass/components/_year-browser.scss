@@ -1,0 +1,67 @@
+@use "../functions";
+@use "../mixins";
+@use "../variables";
+
+.year-browser {
+  border-bottom: functions.px-to-rem(1px) solid variables.$colour-grey;
+  background: variables.$colour-off-white;
+  font-family: variables.$base-font-stack-heading;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+  &__container {
+    margin: 0 auto;
+    max-width: variables.$content-width;
+    overflow-x: scroll;
+    padding: (variables.$base-line-height * 0.5) variables.$base-line-height;
+    -webkit-overflow-scrolling: touch;
+
+    ul {
+      display: flex;
+      gap: variables.$base-line-height;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      position: relative;
+
+      li {
+        padding: 0;
+        margin: 0;
+
+        &:last-child {
+          padding: 0 variables.$base-line-height 0 0;
+        }
+      }
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+
+      &:focus,
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &[aria-current] {
+        position: relative;
+
+        &::after {
+          background: variables.$colour-black;
+          bottom: variables.$base-line-height * -0.5;
+          content: "";
+          display: block;
+          height: functions.px-to-rem(4px);
+          left: 0;
+          position: absolute;
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  &__rule {
+    display: none;
+  }
+}

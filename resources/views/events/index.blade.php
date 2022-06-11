@@ -1,12 +1,22 @@
 @extends('layouts.app')
 
-@section('title', $year)
+@section('title', $selectedYear)
 
 @section('body')
+    @if($years->isNotEmpty())
+        <div class="year-browser">
+            <div class="year-browser__container">
+                <ul>
+                    @foreach($years as $year)
+                        <li><a href="{{ route('year', [$year]) }}" @if($selectedYear === $year)aria-current="page"@endif>{{ $year }}</a></li>
+                    @endforeach
+                </ul>
+            </div>
+            <hr class="year-browser__rule">
+        </div>
+    @endif
     @php
         $reverse = false;
-
-        /** @var \App\Collections\EventCollection $events */
     @endphp
     @foreach ($events->groupByYearMonthAndDayDesc() as $year => $months)
         <div class="year-section year-section--{{ $year }}" id="{{ $year }}">

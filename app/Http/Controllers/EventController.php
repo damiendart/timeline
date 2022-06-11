@@ -27,9 +27,9 @@ class EventController extends Controller
             ->select('date')
             ->get()
             ->pluck('date')
+            ->map(fn (Carbon $date) => $date->year)
             ->unique()
-            ->sortDesc()
-            ->map(fn (Carbon $date) => $date->year);
+            ->sortDesc();
 
         if (null === $year) {
             $year = $years->first();
@@ -47,7 +47,7 @@ class EventController extends Controller
             'events.index',
             [
                 'events' => $events,
-                'year' => $year,
+                'selectedYear' => $year,
                 'years' => $years,
             ],
         );
