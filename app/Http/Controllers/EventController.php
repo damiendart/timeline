@@ -13,22 +13,16 @@ use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\Event;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Collection;
 use Illuminate\View\View;
 
 class EventController extends Controller
 {
     public function index(Event $event, int $year = null): View
     {
-        /** @var Collection<int> $years */
         $years = $event
             ->select('date')
             ->get()
-            ->pluck('date')
-            ->map(fn (Carbon $date) => $date->year)
-            ->unique()
-            ->sortDesc();
+            ->pluckUniqueYearsDesc();
 
         if (null === $year) {
             $year = $years->first();

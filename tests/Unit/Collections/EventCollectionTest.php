@@ -22,19 +22,7 @@ class EventCollectionTest extends TestCase
 {
     public function testGroupingEventsByYearMonthAndDay(): void
     {
-        $collection = new EventCollection();
-
-        $collection->push(
-            new Event(['date' => Carbon::parse('2022-09-05')]),
-            new Event(['date' => Carbon::parse('2022-09-04')]),
-            new Event(['date' => Carbon::parse('2022-09-04')]),
-            new Event(['date' => Carbon::parse('2021-05-21')]),
-            new Event(['date' => Carbon::parse('2022-05-21')]),
-            new Event(['date' => Carbon::parse('2023-05-21')]),
-            new Event(['date' => Carbon::parse('2023-05-21')]),
-            new Event(['date' => Carbon::parse('2023-01-12')]),
-            new Event(['date' => Carbon::parse('2023-01-11')]),
-        );
+        $collection = $this->createTestEventCollection();
 
         $grouped = $collection->groupByYearMonthAndDay();
 
@@ -61,19 +49,7 @@ class EventCollectionTest extends TestCase
 
     public function testGroupingEventsByYearMonthAndDayDescending(): void
     {
-        $collection = new EventCollection();
-
-        $collection->push(
-            new Event(['date' => Carbon::parse('2022-09-05')]),
-            new Event(['date' => Carbon::parse('2022-09-04')]),
-            new Event(['date' => Carbon::parse('2022-09-04')]),
-            new Event(['date' => Carbon::parse('2021-05-21')]),
-            new Event(['date' => Carbon::parse('2022-05-21')]),
-            new Event(['date' => Carbon::parse('2023-05-21')]),
-            new Event(['date' => Carbon::parse('2023-05-21')]),
-            new Event(['date' => Carbon::parse('2023-01-12')]),
-            new Event(['date' => Carbon::parse('2023-01-11')]),
-        );
+        $collection = $this->createTestEventCollection();
 
         $grouped = $collection->groupByYearMonthAndDayDesc();
 
@@ -96,5 +72,42 @@ class EventCollectionTest extends TestCase
         $this->assertEquals([21], $grouped[2022][5]->keys()->toArray());
         $this->assertEquals([12, 11], $grouped[2023][1]->keys()->toArray());
         $this->assertEquals([21], $grouped[2022][5]->keys()->toArray());
+    }
+
+    public function testPluckingUniqueYears(): void
+    {
+        $collection = $this->createTestEventCollection();
+
+        $this->assertEquals(
+            [2021, 2022, 2023],
+            $collection->pluckUniqueYears()->toArray(),
+        );
+    }
+
+    public function testPluckingUniqueYearsDescending(): void
+    {
+        $collection = $this->createTestEventCollection();
+
+        $this->assertEquals(
+            [2023, 2022, 2021],
+            $collection->pluckUniqueYearsDesc()->toArray(),
+        );
+    }
+
+    private function createTestEventCollection(): EventCollection
+    {
+        return new EventCollection(
+            [
+                new Event(['date' => Carbon::parse('2022-09-05')]),
+                new Event(['date' => Carbon::parse('2022-09-04')]),
+                new Event(['date' => Carbon::parse('2022-09-04')]),
+                new Event(['date' => Carbon::parse('2021-05-21')]),
+                new Event(['date' => Carbon::parse('2022-05-21')]),
+                new Event(['date' => Carbon::parse('2023-05-21')]),
+                new Event(['date' => Carbon::parse('2023-05-21')]),
+                new Event(['date' => Carbon::parse('2023-01-12')]),
+                new Event(['date' => Carbon::parse('2023-01-11')]),
+            ],
+        );
     }
 }

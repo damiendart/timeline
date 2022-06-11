@@ -10,13 +10,12 @@ namespace App\Collections;
 
 use App\Models\Event;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
 class EventCollection extends EloquentCollection
 {
-    /**
-     * @return Collection<int, Collection<int, Collection<int, Collection<Event>>>>
-     */
+    /** @return Collection<int, Collection<int, Collection<int, Collection<Event>>>> */
     public function groupByYearMonthAndDay(bool $descending = false): Collection
     {
         // @phpstan-ignore-next-line
@@ -50,5 +49,25 @@ class EventCollection extends EloquentCollection
     public function groupByYearMonthAndDayDesc(): Collection
     {
         return $this->groupByYearMonthAndDay(true);
+    }
+
+    /** @return Collection<int> */
+    public function pluckUniqueYears(bool $descending = false): Collection
+    {
+        return $this->pluck('date')
+            ->map(fn (Carbon $date) => $date->year)
+            ->unique()
+            ->unless(
+                $descending,
+                fn (Collection $collection, bool $_) => $collection->sort(),
+                fn (Collection $collection, bool $_) => $collection->sortDesc(),
+            )
+            ->values();
+    }
+
+    /** @return Collection<int> */
+    public function pluckUniqueYearsDesc(): Collection
+    {
+        return $this->pluckUniqueYears(true);
     }
 }
