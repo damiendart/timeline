@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth'])->group(
     function (): void {
         Route::get('/', [EventController::class, 'index'])->name('home');
+        Route::get('/{year}', [EventController::class, 'index'])->name('year');
         Route::redirect('/events', '/');
         Route::resource('events', EventController::class)->except(['index']);
 

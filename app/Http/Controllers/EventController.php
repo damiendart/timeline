@@ -14,21 +14,43 @@ use App\Models\Event;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\View\View;
 
 class EventController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(Event $event): View
+    public function index(Event $event, int $year = null): View
     {
+        /** @var Collection<int> $years */
+        $years = $event
+            ->select('date')
+            ->get()
+            ->pluck('date')
+            ->unique()
+            ->sortDesc()
+            ->map(fn (Carbon $date) => $date->year);
+
+        if (null === $year) {
+            $year = $years->first();
+        } elseif ($years->doesntContain($year)) {
+            abort(404);
+        }
+
         /** @var EventCollection $events */
         $events = $event->latest('date')
+            ->whereYear('date', '=', $year)
             ->with('category')
             ->get();
 
-        return view('events.index', ['events' => $events]);
+        return view(
+            'events.index',
+            [
+                'events' => $events,
+                'year' => $year,
+                'years' => $years,
+            ],
+        );
     }
 
     /**
@@ -49,7 +71,9 @@ class EventController extends Controller
 
     public function show(Event $event): RedirectResponse
     {
-        return redirect()->route('home')->withFragment($event->slug);
+        return redirect()
+            ->route('year', ['year' => $event->date->year])
+            ->withFragment($event->slug);
     }
 
     public function edit(Event $event): View
@@ -64,7 +88,9 @@ class EventController extends Controller
     {
         $event->update($request->all());
 
-        return redirect()->route('home')->withFragment($event->slug);
+        return redirect()
+            ->route('year', ['year' => $event->date->year])
+            ->withFragment($event->slug);
     }
 
     public function destroy(Event $event): RedirectResponse
