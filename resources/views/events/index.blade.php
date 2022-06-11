@@ -8,7 +8,7 @@
 
         /** @var \App\Collections\EventCollection $events */
     @endphp
-    @foreach ($events->groupByDate() as $year => $months)
+    @foreach ($events->groupByYearMonthAndDayDesc() as $year => $months)
         <div class="year-section year-section--{{ $year }}" id="{{ $year }}">
             <div class="year-section__container">
                 @foreach ($months as $month => $days)
