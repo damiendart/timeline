@@ -27,12 +27,16 @@ tasks:
     cmds:
       - 'cp -rTv ./node_modules/assets/timeline ./public'
     desc: 'Copy pre-built assets'
+    sources:
+      - 'node_modules/assets/timeline/**/*'
 
   build:css:
     cmds:
       - 'node_modules/.bin/sass --no-source-map resources/sass/app.scss {{ .OUTPUT_FILE }}'
       - 'node_modules/.bin/parcel-css --minify --targets ">= 0.25%" {{ .OUTPUT_FILE }} -o {{ .OUTPUT_FILE}}'
     desc: 'Build CSS files with Sass and friends'
+    sources:
+      - 'resources/sass/**/*.scss'
     vars:
       OUTPUT_FILE: 'public/assets/app.css'
 
@@ -40,6 +44,8 @@ tasks:
     cmds:
       - 'node_modules/.bin/esbuild resources/js/app.js --bundle --log-level=warning --outfile={{ .OUTPUT_FILE }}'
     desc: 'Build JavaScript files with esbuild'
+    sources:
+      - 'resources/javascript/**/*.js'
     vars:
       OUTPUT_FILE: 'public/assets/app.js'
 
@@ -56,7 +62,7 @@ tasks:
 
   clean:
     cmds:
-      - 'rm -fr node_modules public/assets release vendor'
+      - 'rm -fr .task node_modules public/assets release vendor'
     desc: 'Delete all buildable files and third-party dependencies'
 
   directories:

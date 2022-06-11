@@ -7,6 +7,7 @@
 .env.backup
 .php-cs-fixer.cache
 .phpunit.result.cache
+.task
 bootstrap/cache
 node_modules
 public/assets
