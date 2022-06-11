@@ -10,38 +10,26 @@ namespace App\Collections;
 
 use App\Models\Event;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
 class EventCollection extends EloquentCollection
 {
+    /** @return Collection<int, Collection<int, Collection<int, Collection<Event>>>> */
     public function groupByDate(): Collection
     {
+        // @phpstan-ignore-next-line
         return $this
-            ->groupBy(
-                /** @phpstan-ignore-next-line */
-                function (Event $event): string {
-                    return Carbon::parse($event->date)->format('Y');
-                },
-            )->map(
-                function (Collection $years) {
-                    return $years->groupBy(
-                        /** @phpstan-ignore-next-line */
-                        function (Event $event): string {
-                            return Carbon::parse($event->date)->format('m');
-                        },
-                    )->map(
-                        function (Collection $months) {
-                            /** @phpstan-ignore-next-line */
-                            return $months->groupBy(
-                                /** @phpstan-ignore-next-line */
-                                function (Event $event): string {
-                                    return Carbon::parse($event->date)
-                                        ->format('d');
-                                },
-                            );
-                        },
-                    );
+            ->groupBy('date.year')
+            ->map(
+                function (Collection $years): Collection {
+                    return $years
+                        ->groupBy('date.month')
+                        ->map(
+                            function (Collection $months): Collection {
+                                // @phpstan-ignore-next-line
+                                return $months->groupBy('date.day');
+                            },
+                        );
                 },
             );
     }
