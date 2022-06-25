@@ -16,7 +16,11 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 
 class EventServiceProvider extends ServiceProvider
 {
-    /** {@inheritdoc}  */
+    /**
+     * {@inheritdoc}
+     *
+     * @var array<class-string,class-string[]>
+     */
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,

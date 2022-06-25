@@ -18,6 +18,9 @@ class Category extends Model
 {
     use HasFactory;
 
+    /**
+     * @return HasMany<Event>
+     */
     public function events(): HasMany
     {
         return $this->hasMany(Event::class);

@@ -32,6 +32,9 @@ class Event extends Model
         'title',
     ];
 
+    /**
+     * @return BelongsTo<Category, Event>
+     */
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
@@ -42,6 +45,9 @@ class Event extends Model
         return 'slug';
     }
 
+    /**
+     * @param Event[] $models
+     */
     public function newCollection(array $models = []): EventCollection
     {
         return new EventCollection($models);

@@ -28,6 +28,7 @@ class StoreEventRequest extends FormRequest
         ]);
     }
 
+    /** @phpstan-ignore-next-line */
     public function rules(): array
     {
         return [

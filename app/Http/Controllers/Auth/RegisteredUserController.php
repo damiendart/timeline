@@ -16,10 +16,11 @@ use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
-    public function create()
+    public function create(): View
     {
         return view('auth.register');
     }

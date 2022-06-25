@@ -17,7 +17,7 @@ class TrustHosts extends Middleware
     /**
      * Get the host patterns that should be trusted.
      *
-     * @return array
+     * @return array<array-key, ?string>
      */
     public function hosts()
     {
