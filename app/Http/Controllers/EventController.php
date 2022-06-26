@@ -19,16 +19,27 @@ use Illuminate\View\View;
 
 class EventController extends Controller
 {
-    public function index(Event $event, int $year = null): View
+    public function index(Event $event): RedirectResponse
     {
         $years = $event
             ->select('date')
             ->get()
             ->pluckUniqueYearsDesc();
 
-        if (null === $year) {
-            $year = $years->first();
-        } elseif ($years->doesntContain($year)) {
+        return redirect()->route(
+            'year',
+            ['year' => (string) $years->first()],
+        );
+    }
+
+    public function indexByYear(Event $event, int $year): View
+    {
+        $years = $event
+            ->select('date')
+            ->get()
+            ->pluckUniqueYearsDesc();
+
+        if ($years->doesntContain($year)) {
             abort(404);
         }
 
