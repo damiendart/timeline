@@ -23,7 +23,7 @@ class Event extends Model
      * {@inheritdoc}
      */
     protected $casts = [
-        'date' => 'datetime:Y-m-d',
+        'date' => 'immutable_datetime:Y-m-d',
     ];
 
     /**

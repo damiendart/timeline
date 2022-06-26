@@ -12,7 +12,7 @@ namespace Tests\Unit\Collections;
 
 use App\Collections\EventCollection;
 use App\Models\Event;
-use Illuminate\Support\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Collection;
 use Tests\TestCase;
 
@@ -100,15 +100,15 @@ class EventCollectionTest extends TestCase
     {
         return new EventCollection(
             [
-                new Event(['date' => Carbon::parse('2022-09-05')]),
-                new Event(['date' => Carbon::parse('2022-09-04')]),
-                new Event(['date' => Carbon::parse('2022-09-04')]),
-                new Event(['date' => Carbon::parse('2021-05-21')]),
-                new Event(['date' => Carbon::parse('2022-05-21')]),
-                new Event(['date' => Carbon::parse('2023-05-21')]),
-                new Event(['date' => Carbon::parse('2023-05-21')]),
-                new Event(['date' => Carbon::parse('2023-01-12')]),
-                new Event(['date' => Carbon::parse('2023-01-11')]),
+                new Event(['date' => CarbonImmutable::parse('2022-09-05')]),
+                new Event(['date' => CarbonImmutable::parse('2022-09-04')]),
+                new Event(['date' => CarbonImmutable::parse('2022-09-04')]),
+                new Event(['date' => CarbonImmutable::parse('2021-05-21')]),
+                new Event(['date' => CarbonImmutable::parse('2022-05-21')]),
+                new Event(['date' => CarbonImmutable::parse('2023-05-21')]),
+                new Event(['date' => CarbonImmutable::parse('2023-05-21')]),
+                new Event(['date' => CarbonImmutable::parse('2023-01-12')]),
+                new Event(['date' => CarbonImmutable::parse('2023-01-11')]),
             ],
         );
     }

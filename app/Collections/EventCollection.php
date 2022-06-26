@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Collections;
 
 use App\Models\Event;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
@@ -66,7 +67,7 @@ class EventCollection extends EloquentCollection
     public function pluckUniqueYears(bool $descending = false): Collection
     {
         return $this->pluck('date')
-            ->map(fn (Carbon $date) => $date->year)
+            ->map(fn (Carbon|CarbonImmutable $date) => $date->year)
             ->unique()
             ->unless(
                 $descending,
