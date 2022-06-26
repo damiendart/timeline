@@ -57,6 +57,7 @@ tasks:
       - task: 'key-generate'
       - task: 'build'
       - task: 'lint'
+      - task: 'static-analysis'
       - task: 'test'
     desc: 'Run all CI-related tasks'
 
