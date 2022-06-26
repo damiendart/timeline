@@ -15,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    /** @var string */
+    /**
+     * @var string
+     */
     public const HOME = '/';
 
     public function boot(): void

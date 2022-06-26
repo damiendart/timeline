@@ -31,6 +31,7 @@ return (new PhpCsFixer\Config())
         'multiline_whitespace_before_semicolons' => [
             'strategy' => 'no_multi_line'
         ],
+        'phpdoc_line_span' => true,
         'trailing_comma_in_multiline' => [
             'elements' => ['arrays', 'arguments', 'parameters'],
         ],

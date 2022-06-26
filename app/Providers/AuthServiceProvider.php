@@ -14,7 +14,9 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 
 class AuthServiceProvider extends ServiceProvider
 {
-    /** {@inheritdoc} */
+    /**
+     * {@inheritdoc}
+     */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
     ];

@@ -20,7 +20,9 @@ use Illuminate\Support\Collection;
  */
 class EventCollection extends EloquentCollection
 {
-    /** @return Collection<int, Collection<int, Collection<int, Collection<int, Event>>>> */
+    /**
+     * @return Collection<int, Collection<int, Collection<int, Collection<int, Event>>>>
+     */
     public function groupByYearMonthAndDay(bool $descending = false): Collection
     {
         // @phpstan-ignore-next-line
@@ -50,13 +52,17 @@ class EventCollection extends EloquentCollection
             );
     }
 
-    /** @return Collection<int, Collection<int, Collection<int, Collection<int, Event>>>> */
+    /**
+     * @return Collection<int, Collection<int, Collection<int, Collection<int, Event>>>>
+     */
     public function groupByYearMonthAndDayDesc(): Collection
     {
         return $this->groupByYearMonthAndDay(true);
     }
 
-    /** @return Collection<int, int> */
+    /**
+     * @return Collection<int, int>
+     */
     public function pluckUniqueYears(bool $descending = false): Collection
     {
         return $this->pluck('date')
@@ -70,7 +76,9 @@ class EventCollection extends EloquentCollection
             ->values();
     }
 
-    /** @return Collection<int, int> */
+    /**
+     * @return Collection<int, int>
+     */
     public function pluckUniqueYearsDesc(): Collection
     {
         return $this->pluckUniqueYears(true);

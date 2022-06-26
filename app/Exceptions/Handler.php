@@ -15,11 +15,15 @@ use Throwable;
 
 class Handler extends ExceptionHandler
 {
-    /** {@inheritdoc} */
+    /**
+     * {@inheritdoc}
+     */
     protected $dontReport = [
     ];
 
-    /** {@inheritdoc} */
+    /**
+     * {@inheritdoc}
+     */
     protected $dontFlash = [
         'current_password',
         'password',

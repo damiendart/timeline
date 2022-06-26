@@ -20,7 +20,9 @@ class RegisterRequest extends FormRequest
         return true;
     }
 
-    /** @phpstan-ignore-next-line */
+    /**
+     * @phpstan-ignore-next-line
+     */
     public function rules(): array
     {
         return [

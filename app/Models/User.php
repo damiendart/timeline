@@ -19,20 +19,26 @@ class User extends Authenticatable
     use HasFactory;
     use Notifiable;
 
-    /** {@inheritdoc} */
+    /**
+     * {@inheritdoc}
+     */
     protected $fillable = [
         'name',
         'email',
         'password',
     ];
 
-    /** {@inheritdoc} */
+    /**
+     * {@inheritdoc}
+     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /** {@inheritdoc} */
+    /**
+     * {@inheritdoc}
+     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
